@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/database?currentSchema=demo
+    username: postgres
+    password: pass123

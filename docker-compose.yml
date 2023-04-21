@@ -1,0 +1,25 @@
+---
+version: '1'
+
+#networks:
+#  demo_network:
+#    driver: bridge
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 172.19.0.0/24
+#          gateway: 172.19.0.1
+
+services:
+  postgres:
+    image: 'postgres:12.10'
+#    networks:
+#      - demo_network
+    hostname: postgres
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass123
+      POSTGRES_DB: database
