@@ -15,7 +15,7 @@ public class SpeakerController {
 
     private SpeakerService service;
 
-    @PostMapping("/adlikes")
+    @PostMapping("/addlikes")
     public ResponseEntity<String> updateSpeaker(@RequestBody Likes likes) {
         try {
             service.addLikesToSpeaker(likes);

@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "speakers")
-public class SpeakerEntity {
+@Table(name = "tech_star")
+public class TechStarEntity {
 
     @Id
     private Long id;
@@ -28,8 +28,8 @@ public class SpeakerEntity {
     @Column(name = "lastname")
     private String lastName;
 
-    @Column(name = "talkname")
-    private String talkName;
+//    @Column(name = "technology")
+    private String technology;
 
     private int likes;
 

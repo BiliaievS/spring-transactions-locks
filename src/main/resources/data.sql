@@ -1,29 +1,33 @@
-CREATE SCHEMA demo;
-CREATE TABLE IF NOT EXISTS demo.tech_star(
-    id         SERIAL NOT NULL,
-    firstname  varchar NOT NULL,
-    lastname   varchar NOT NULL,
-    talkname   varchar NOT NULL,
-    likes      int8 NULL,
-    created    timestamp NULL,
-    updated    timestamp NULL,
+create schema demo;
 
-    CONSTRAINT tech_star_pk PRIMARY KEY (id),
-    CONSTRAINT talkname_unique UNIQUE (talkname)
+drop table if exists demo.tech_star;
+drop table if exists demo.history;
+
+create table if not exists demo.tech_star(
+    id         serial not null,
+    firstname  varchar not null,
+    lastname   varchar not null,
+    technology   varchar not null,
+    likes      int8 null,
+    created    timestamp null,
+    updated    timestamp null,
+
+    constraint tech_star_pk primary key (id),
+    constraint technology_unique unique (technology)
 );
 
-create TABLE IF NOT EXISTS demo.history(
-    id         SERIAL NOT NULL,
-    talkname   varchar NULL,
-    likes      int8 NULL,
-    status     varchar NULL,
-    created    timestamp NULL,
+create table if not exists demo.history(
+    id         serial not null,
+    technology   varchar null,
+    likes      int8 null,
+    status     varchar null,
+    created    timestamp null,
 
-    CONSTRAINT history_pk PRIMARY KEY (id)
+    constraint history_pk primary key (id)
 );
 
 delete from demo.tech_star;
-insert into demo.tech_star (id, firstname, lastname, talkname, likes, created, updated) values (1, 'John', 'Doe', 'Spring best developer',  0, now(), now());
+insert into demo.tech_star (id, firstname, lastname, technology, likes, created, updated) values (1, 'John', 'Doe', 'Spring best developer',  0, now(), now());
 delete from demo.history;
 
 select  * from tech_star;
