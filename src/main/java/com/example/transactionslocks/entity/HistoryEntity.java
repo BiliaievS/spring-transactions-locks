@@ -19,7 +19,7 @@ public class HistoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String technology;
-    private int likes;
+    private int votes;
     private String status;
     @CreationTimestamp
     @Column(updatable = false, nullable = false)

@@ -1,6 +1,6 @@
 package com.example.transactionslocks.service;
 
-import com.example.transactionslocks.dto.Likes;
+import com.example.transactionslocks.dto.Votes;
 import com.example.transactionslocks.entity.HistoryEntity;
 import com.example.transactionslocks.repository.HistoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +14,11 @@ public class HistoryService {
 
     private final HistoryRepository repository;
 
-    public void saveMessageToHistory(Likes likes, String status) {
+    public void saveMessageToHistory(Votes votes, String status) {
         try {
             repository.save(HistoryEntity.builder()
-                    .technology(likes.getTechnology())
-                    .likes(likes.getLikes())
+                    .technology(votes.getTechnology())
+                    .votes(votes.getVotes())
                     .status(status)
                     .build());
         } catch (RuntimeException e) {

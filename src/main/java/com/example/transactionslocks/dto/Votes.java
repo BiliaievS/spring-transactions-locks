@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Likes {
+public class Votes {
 
-    @JsonProperty("talkName")
-    private String talkName;
+    @JsonProperty("technology")
+    private String technology;
 
-    @JsonProperty("likes")
-    private int likes;
+    @JsonProperty("votes")
+    private int votes;
 
 }

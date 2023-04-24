@@ -1,6 +1,6 @@
 package com.example.transactionslocks.controller;
 
-import com.example.transactionslocks.dto.Likes;
+import com.example.transactionslocks.dto.Votes;
 import com.example.transactionslocks.service.SpeakerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,11 +15,11 @@ public class SpeakerController {
 
     private SpeakerService service;
 
-    @PostMapping("/addlikes")
-    public ResponseEntity<String> updateSpeaker(@RequestBody Likes likes) {
+    @PostMapping("/addvotes")
+    public ResponseEntity<String> updateSpeaker(@RequestBody Votes votes) {
         try {
-            service.addLikesToSpeaker(likes);
-            return new ResponseEntity<>("Likes successfully added.", HttpStatus.ACCEPTED);
+            service.addVotesToStar(votes);
+            return new ResponseEntity<>("Votes successfully added.", HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             log.warn("Exception in controller:", ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);

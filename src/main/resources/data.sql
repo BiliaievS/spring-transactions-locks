@@ -8,7 +8,7 @@ create table if not exists demo.tech_star(
     firstname  varchar not null,
     lastname   varchar not null,
     technology   varchar not null,
-    likes      int8 null,
+    votes      int8 null,
     created    timestamp null,
     updated    timestamp null,
 
@@ -19,7 +19,7 @@ create table if not exists demo.tech_star(
 create table if not exists demo.history(
     id         serial not null,
     technology   varchar null,
-    likes      int8 null,
+    votes      int8 null,
     status     varchar null,
     created    timestamp null,
 
@@ -27,7 +27,7 @@ create table if not exists demo.history(
 );
 
 delete from demo.tech_star;
-insert into demo.tech_star (id, firstname, lastname, technology, likes, created, updated) values (1, 'John', 'Doe', 'Spring best developer',  0, now(), now());
+insert into demo.tech_star (id, firstname, lastname, technology, votes, created, updated) values (1, 'John', 'Doe', 'Spring best developer',  0, now(), now());
 delete from demo.history;
 
 select  * from tech_star;

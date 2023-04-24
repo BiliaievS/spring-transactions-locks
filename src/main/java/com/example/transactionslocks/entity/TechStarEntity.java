@@ -31,7 +31,7 @@ public class TechStarEntity {
 //    @Column(name = "technology")
     private String technology;
 
-    private int likes;
+    private int votes;
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
