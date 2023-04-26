@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class SpeakerService {
+public class TechStarService {
 
     private final TechStarsRepository starsRepository;
     private final HistoryService historyService;

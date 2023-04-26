@@ -28,7 +28,6 @@ public class TechStarEntity {
     @Column(name = "lastname")
     private String lastName;
 
-//    @Column(name = "technology")
     private String technology;
 
     private int votes;
