@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class HistoryService {
 
     private final HistoryRepository repository;
@@ -17,6 +17,7 @@ public class HistoryService {
     public void saveMessageToHistory(Votes votes, String status) {
         try {
             repository.save(HistoryEntity.builder()
+                    .code(votes.getCode())
                     .technology(votes.getTechnology())
                     .votes(votes.getVotes())
                     .status(status)
@@ -25,5 +26,4 @@ public class HistoryService {
             log.error("Couldn't save message to history.", e);
         }
     }
-
 }

@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Votes {
 
+    @JsonProperty("code")
+    private String code;
+
     @JsonProperty("technology")
     private String technology;
 

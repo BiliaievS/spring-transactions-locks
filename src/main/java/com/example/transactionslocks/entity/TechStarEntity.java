@@ -22,12 +22,15 @@ public class TechStarEntity {
     @Id
     private Long id;
 
+    private String code;
+
     @Column(name = "firstname")
     private String firstName;
 
     @Column(name = "lastname")
     private String lastName;
 
+    @Column(name = "technology")
     private String technology;
 
     private int votes;

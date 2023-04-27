@@ -18,6 +18,7 @@ public class HistoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String code;
     private String technology;
     private int votes;
     private String status;

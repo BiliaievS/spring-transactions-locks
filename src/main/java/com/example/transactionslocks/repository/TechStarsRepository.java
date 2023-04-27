@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface TechStarsRepository extends JpaRepository<TechStarEntity, Long> {
 
     Optional<TechStarEntity> findByTechnology(String technology);
+
+    Optional<TechStarEntity> findByCode(String code);
 }

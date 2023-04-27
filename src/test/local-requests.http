@@ -1,0 +1,9 @@
+### Send POST request with json body
+POST http://localhost:8080/addvotes
+Content-Type: application/json
+
+{
+  "code": "WP001",
+  "technology": "Java",
+  "votes": 1
+}
