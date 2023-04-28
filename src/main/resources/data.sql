@@ -1,7 +1,7 @@
-create schema demo;
+--create schema demo;
 
-drop table if exists demo.tech_star;
-drop table if exists demo.history;
+--drop table if exists demo.tech_star;
+--drop table if exists demo.history;
 
 create table if not exists demo.tech_star(
     id          serial not null,

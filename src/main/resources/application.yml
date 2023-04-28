@@ -2,7 +2,12 @@ server:
   port: 8080
 
 spring:
+  sql.init.mode: always
   datasource:
     url: jdbc:postgresql://localhost:5432/database?currentSchema=demo
     username: postgres
     password: pass123
+    hikari:
+      transaction-isolation: TRANSACTION_REPEATABLE_READ # TRANSACTION_READ_COMMITTED / TRANSACTION_REPEATABLE_READ / TRANSACTION_SERIALIZABLE
+#      maximum-pool-size: 10
+

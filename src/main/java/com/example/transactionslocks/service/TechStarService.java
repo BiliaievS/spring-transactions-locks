@@ -1,13 +1,12 @@
 package com.example.transactionslocks.service;
 
 import com.example.transactionslocks.dto.Votes;
-import com.example.transactionslocks.entity.TechStarEntity;
 import com.example.transactionslocks.repository.TechStarsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -17,16 +16,18 @@ public class TechStarService {
     private final TechStarsRepository starsRepository;
     private final HistoryService historyService;
 
+    @Transactional
+    @Retryable(maxAttempts = 15)
     public void addVotesToStar(Votes votes) {
         if (votes.getTechnology() != null) {
-            Optional<TechStarEntity> byCode = starsRepository.findByCode(votes.getCode());
-            byCode.ifPresentOrElse(star -> {
+            starsRepository.findByCode(votes.getCode()).ifPresentOrElse(star -> {
                 saveMessageToHistory(votes, "RECEIVED");
                 star.setVotes(star.getVotes() + votes.getVotes());
                 star.setTechnology(votes.getTechnology());
                 starsRepository.save(star);
                 log.info("{} likes add to <{} {}> for {}.", votes.getVotes(), star.getFirstName(), star.getLastName(), star.getTechnology());
             }, () -> {
+                log.warn("Tech Star with internal code {} not found", votes.getCode());
                 saveMessageToHistory(votes, "NONAME");
             });
         } else {
