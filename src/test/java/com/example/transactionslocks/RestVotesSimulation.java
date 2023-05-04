@@ -9,7 +9,7 @@ import io.gatling.javaapi.http.HttpProtocolBuilder;
 
 import static io.gatling.javaapi.core.CoreDsl.StringBody;
 
-public class AddVoutesSimulation extends Simulation {
+public class RestVotesSimulation extends Simulation {
 
     private static final HttpProtocolBuilder PROTOCOL_BUILDER = setupProtocol().acceptEncodingHeader("gzip, deflate, br").maxConnectionsPerHost(10).userAgentHeader("Add votes performance test");
 
@@ -51,7 +51,7 @@ public class AddVoutesSimulation extends Simulation {
                 """;
     }
 
-    public AddVoutesSimulation() {
+    public RestVotesSimulation() {
         setUp(POST_SCN.injectOpen(postInjectionProfile())).protocols(PROTOCOL_BUILDER);
     }
 

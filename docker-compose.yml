@@ -1,20 +1,42 @@
 ---
 version: '1'
 
-#networks:
-#  demo_network:
-#    driver: bridge
-#    ipam:
-#      driver: default
-#      config:
-#        - subnet: 172.19.0.0/24
-#          gateway: 172.19.0.1
+networks:
+  demo_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.0.0/24
+          gateway: 172.19.0.1
 
 services:
+  prometheus:
+    image: docker.io/prom/prometheus:latest
+    networks:
+      - demo_network
+    hostname: prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - /Users/sbiliaiev/work/data/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: docker.io/grafana/grafana:latest
+    networks:
+      - demo_network
+    hostname: grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - /Users/sbiliaiev/work/data/docker/grafana/storage:/var/lib/grafana
+
   postgres:
     image: 'postgres:12.10'
-#    networks:
-#      - demo_network
+    networks:
+      - demo_network
     hostname: postgres
     container_name: postgres
     ports:
@@ -23,3 +45,14 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pass123
       POSTGRES_DB: database
+
+#  demo-app:
+#    container_name: transaction-app
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    networks:
+#      - demo_network
+#    hostname: transaction-app
+#    ports:
+#      - "8080:8080"

@@ -30,6 +30,7 @@ create table if not exists demo.history(
 
 delete from demo.tech_star;
 insert into demo.tech_star (id, code, firstname, lastname, technology, votes, created, updated) values (1, 'WP001', 'John', 'Doe', 'Spring best developer',  0, now(), now());
+insert into demo.tech_star (id, code, firstname, lastname, technology, votes, created, updated) values (2, 'WC123', 'Dave', 'Doe', 'best developer',  0, now(), now());
 delete from demo.history;
 
 select  * from tech_star;
