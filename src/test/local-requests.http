@@ -7,3 +7,13 @@ Content-Type: application/json
   "technology": "Java",
   "votes": 1
 }
+
+### Send POST request with json body to create task
+POST http://localhost:8080/votetask
+Content-Type: application/json
+
+{
+  "code": "WC123",
+  "technology": "Java",
+  "votes": 1
+}

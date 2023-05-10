@@ -11,6 +11,53 @@ networks:
           gateway: 172.19.0.1
 
 services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.2
+    networks:
+      - demo_network
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-kafka:7.3.2
+    networks:
+      - demo_network
+    container_name: broker
+    ports:
+      # To learn about configuring Kafka for access across networks see
+      # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+#      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+#      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:29092
+#      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+#      CONFLUENT_METRICS_ENABLE: 'true'
+
+  kafka-lag-exporter:
+    image: seglo/kafka-lag-exporter
+    networks:
+      - demo_network
+    hostname: kafka-lag-exporter
+    container_name: kafka-lag-exporter
+    ports:
+      - "8000:8000"
+    volumes:
+      - /Users/sbiliaiev/work/data/docker/lag-exporter/application.conf:/opt/docker/conf/application.conf
+      - /Users/sbiliaiev/work/data/docker/lag-exporter/logback.xml:/opt/docker/conf/logback.xml
+
   prometheus:
     image: docker.io/prom/prometheus:latest
     networks:
@@ -40,7 +87,7 @@ services:
     hostname: postgres
     container_name: postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pass123

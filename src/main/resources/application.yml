@@ -1,13 +1,35 @@
 server:
   port: 8080
+#  tomcat.mbeanregistry.enabled: true
 
 spring:
   sql.init.mode: always
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          auto-create-topics: true
+          auto-add-partitions: true
+          consumer-properties:
+            max.poll.records: 200
+            fetch.max.wait.ms: 100
+      bindings:
+        votesConsumer-in-0:
+          destination: votes-topic
+          group: votes-consumer-group
+          consumer:
+            maxAttempts: 1
+            #            batch-mode: true`
+            concurrency: 5
+        votesProducer-out-0:
+          destination: votes-topic
+
   datasource:
     url: jdbc:postgresql://localhost:5432/database?currentSchema=demo
     username: postgres
     password: pass123
     hikari:
-      transaction-isolation: TRANSACTION_REPEATABLE_READ # TRANSACTION_READ_COMMITTED / TRANSACTION_REPEATABLE_READ / TRANSACTION_SERIALIZABLE
-#      maximum-pool-size: 10
+      transaction-isolation: TRANSACTION_READ_COMMITTED # TRANSACTION_READ_COMMITTED / TRANSACTION_REPEATABLE_READ / TRANSACTION_SERIALIZABLE
+      maximum-pool-size: 10
 
