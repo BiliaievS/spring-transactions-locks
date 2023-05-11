@@ -27,7 +27,7 @@ public class TechStarService {
                 star.setVotes(star.getVotes() + votes.getVotes());
                 star.setTechnology(votes.getTechnology());
                 starsRepository.save(star);
-                log.info("{} likes add to <{} {}> for {}.", votes.getVotes(), star.getFirstName(), star.getLastName(), star.getTechnology());
+                log.info("{} votes add to {} {} for {}.", votes.getVotes(), star.getFirstName(), star.getLastName(), star.getTechnology());
             }, () -> {
                 log.warn("Tech Star with internal code {} not found", votes.getCode());
                 saveMessageToHistory(votes, "NONAME");

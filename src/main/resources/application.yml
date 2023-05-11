@@ -22,6 +22,7 @@ spring:
             maxAttempts: 1
             #            batch-mode: true`
             concurrency: 5
+#            use-native-decoding: true
         votesProducer-out-0:
           destination: votes-topic
 
@@ -33,3 +34,19 @@ spring:
       transaction-isolation: TRANSACTION_READ_COMMITTED # TRANSACTION_READ_COMMITTED / TRANSACTION_REPEATABLE_READ / TRANSACTION_SERIALIZABLE
       maximum-pool-size: 10
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    info:
+      enabled: true
+#  metrics.tags.application: transactionslocksapp
+#management:
+#  endpoint:
+#    info:
+#      enabled: true
+#  metrics.tags.application: transactionslocks-demo-app
+#  endpoints.web.exposure.include: health,info,metrics,prometheus,loggers
+#management.endpoints.web.exposure.include: health,info,prometheus
