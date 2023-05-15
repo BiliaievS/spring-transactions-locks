@@ -17,9 +17,9 @@ public class HistoryService {
     public void saveMessageToHistory(Votes votes, String status) {
         try {
             repository.save(HistoryEntity.builder()
-                    .code(votes.getCode())
-                    .technology(votes.getTechnology())
-                    .votes(votes.getVotes())
+                    .code(votes.code())
+                    .technology(votes.technology())
+                    .votes(votes.votes())
                     .status(status)
                     .build());
         } catch (RuntimeException e) {

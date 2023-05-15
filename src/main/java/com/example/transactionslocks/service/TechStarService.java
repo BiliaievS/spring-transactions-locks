@@ -21,15 +21,15 @@ public class TechStarService {
     @Transactional
     @Retryable(maxAttempts = 15)
     public void addVotesToStar(Votes votes) {
-        if (votes.getTechnology() != null) {
-            starsRepository.findByCode(votes.getCode()).ifPresentOrElse(star -> {
+        if (votes.technology() != null) {
+            starsRepository.findByCode(votes.code()).ifPresentOrElse(star -> {
                 saveMessageToHistory(votes, "RECEIVED");
-                star.setVotes(star.getVotes() + votes.getVotes());
-                star.setTechnology(votes.getTechnology());
+                star.setVotes(star.getVotes() + votes.votes());
+                star.setTechnology(votes.technology());
                 starsRepository.save(star);
-                log.info("{} votes add to {} {} for {}.", votes.getVotes(), star.getFirstName(), star.getLastName(), star.getTechnology());
+                log.info("{} votes add to {} {} for {}.", votes.votes(), star.getFirstName(), star.getLastName(), star.getTechnology());
             }, () -> {
-                log.warn("Tech Star with internal code {} not found", votes.getCode());
+                log.warn("Tech Star with internal code {} not found", votes.code());
                 saveMessageToHistory(votes, "NONAME");
             });
         } else {

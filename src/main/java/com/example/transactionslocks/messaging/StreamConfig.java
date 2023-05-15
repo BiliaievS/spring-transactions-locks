@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.function.Consumer;
 
+/**
+ *
+ */
 @Slf4j
 //@Configuration
 @RequiredArgsConstructor

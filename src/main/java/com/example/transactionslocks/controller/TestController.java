@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @GetMapping("/")
+    @GetMapping
     public String index() {
         return "Service up and running!";
     }
 
     @GetMapping("/test")
-//    @Transactional
     public ResponseEntity<String> testTransaction() {
         log.warn("Thread {} started", Thread.currentThread().getId());
         log.warn("Thread {} finished the work", Thread.currentThread().getId());
