@@ -31,7 +31,7 @@ spring:
     username: postgres
     password: pass123
     hikari:
-      transaction-isolation: TRANSACTION_READ_COMMITTED # TRANSACTION_READ_COMMITTED / TRANSACTION_REPEATABLE_READ / TRANSACTION_SERIALIZABLE
+      transaction-isolation: TRANSACTION_REPEATABLE_READ # TRANSACTION_READ_COMMITTED / TRANSACTION_REPEATABLE_READ / TRANSACTION_SERIALIZABLE
       maximum-pool-size: 10
 
 management:
@@ -42,11 +42,3 @@ management:
   endpoint:
     info:
       enabled: true
-#  metrics.tags.application: transactionslocksapp
-#management:
-#  endpoint:
-#    info:
-#      enabled: true
-#  metrics.tags.application: transactionslocks-demo-app
-#  endpoints.web.exposure.include: health,info,metrics,prometheus,loggers
-#management.endpoints.web.exposure.include: health,info,prometheus

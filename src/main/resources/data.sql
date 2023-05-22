@@ -13,7 +13,7 @@ create table if not exists demo.tech_star(
     created     timestamp null,
     updated     timestamp null,
 
-    constraint tech_star_pk primary key (id),
+    constraint tech_star_pk primary key (id)--,
 --     constraint technology_unique unique (technology)
 );
 
