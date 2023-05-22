@@ -14,7 +14,7 @@ create table if not exists demo.tech_star(
     updated     timestamp null,
 
     constraint tech_star_pk primary key (id),
-    constraint technology_unique unique (technology)
+--     constraint technology_unique unique (technology)
 );
 
 create table if not exists demo.history(

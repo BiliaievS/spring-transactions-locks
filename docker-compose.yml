@@ -97,6 +97,19 @@ services:
       POSTGRES_PASSWORD: pass123
       POSTGRES_DB: database
 
+#  cadvisor:
+#    image: gcr.io/cadvisor/cadvisor:latest
+#    networks:
+#      - demo_network
+#    hostname: cadvisor
+#    container_name: cadvisor
+#    volumes:
+#      - /var/run:/var/run:rw
+#      - /sys:/sys:ro
+#      - /var/lib/docker/:/var/lib/docker:ro
+#    ports:
+#      - 8001:8080
+
 #  demo-app:
 #    container_name: transaction-app
 #    build:
